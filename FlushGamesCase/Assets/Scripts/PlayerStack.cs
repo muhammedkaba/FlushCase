@@ -67,7 +67,7 @@ public class PlayerStack : MonoBehaviour
         {
             SoldGemsController.i.CropSold(topCrop.cropId);
             GameManager.i.AddGold(value);
-            Destroy(topCrop);
+            Destroy(topCrop.gameObject);
         });
         crops.RemoveAt(crops.Count - 1);
     }
