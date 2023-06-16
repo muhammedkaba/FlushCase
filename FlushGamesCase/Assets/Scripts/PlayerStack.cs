@@ -24,7 +24,7 @@ public class PlayerStack : MonoBehaviour
             crops.Add(crop);
             crop.transform.SetParent(stackParent);
             crop.transform.DOLocalMove(new Vector3(0, yPos, 0), 0.4f);
-            yPos += crop.GetComponent<MeshRenderer>().bounds.size.y * 1.1f;
+            yPos += crop.GetComponent<MeshRenderer>().bounds.size.y;
         }
         if (other.TryGetComponent<SellArea>(out SellArea s))
         {
@@ -62,7 +62,8 @@ public class PlayerStack : MonoBehaviour
         CollectedCrop topCrop = crops[crops.Count - 1];
         topCrop.transform.DOKill();
         int value = topCrop.value;
-        yPos -= topCrop.GetComponent<MeshRenderer>().bounds.size.y * 1.1f;
+        topCrop.transform.rotation = Quaternion.identity;
+        yPos -= topCrop.GetComponent<MeshRenderer>().bounds.size.y;
         topCrop.transform.DOJump(lastArea.sellPos.position, 1, 1, 0.2f).OnComplete(() =>
         {
             SoldGemsController.i.CropSold(topCrop.cropId);
